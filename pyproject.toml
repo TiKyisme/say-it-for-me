@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "say-it-for-me"
+version = "0.1.0"
+description = "Offline Vietnamese-Korean voice translation pipeline for the OneVoice AI Challenge"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Proprietary - competition prototype" }
+authors = [{ name = "Say It For Me Team" }]
+dependencies = []
+
+[project.optional-dependencies]
+evaluation = ["sacrebleu>=2.5,<3"]
+
+[project.scripts]
+say-it-for-me = "say_it_for_me.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

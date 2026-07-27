@@ -1,0 +1,5 @@
+# The architecture vertical slice uses only the Python standard library.
+# Add ML dependencies only after each model spike records its runtime,
+# version, license, artifact size, latency, and memory evidence.
+-e .
+

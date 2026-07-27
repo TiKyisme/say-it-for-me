@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "models": [
+    {
+      "id": "asr-whisper-tiny-multilingual",
+      "stage": "asr",
+      "version": "TBC-after-spike",
+      "relative_path": "artifacts/asr/whisper-tiny",
+      "sha256": null,
+      "license": "MIT",
+      "runtime": "onnxruntime-or-ctranslate2-TBC",
+      "precision": "int8-candidate",
+      "directions": ["vi-ko", "ko-vi"]
+    },
+    {
+      "id": "nmt-nllb-600m-candidate",
+      "stage": "translation",
+      "version": "facebook/nllb-200-distilled-600M@TBC",
+      "relative_path": "artifacts/translation/nllb-600m-int8",
+      "sha256": null,
+      "license": "CC-BY-NC-4.0; research/non-production caveat",
+      "runtime": "ctranslate2",
+      "precision": "int8-candidate",
+      "directions": ["vi-ko", "ko-vi"]
+    },
+    {
+      "id": "tts-vi-piper-candidate",
+      "stage": "tts",
+      "version": "TBC-exact-voice-model-card",
+      "relative_path": "artifacts/tts/vi",
+      "sha256": null,
+      "license": "TBC-from-voice-model-card",
+      "runtime": "onnxruntime",
+      "precision": "TBC",
+      "directions": ["ko-vi"]
+    },
+    {
+      "id": "tts-ko-candidate",
+      "stage": "tts",
+      "version": "TBC",
+      "relative_path": "artifacts/tts/ko",
+      "sha256": null,
+      "license": "TBC",
+      "runtime": "TBC",
+      "precision": "TBC",
+      "directions": ["vi-ko"]
+    }
+  ]
+}
+

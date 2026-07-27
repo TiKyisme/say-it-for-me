@@ -88,7 +88,7 @@ organizer. Do not leave this table ambiguous.
 | Fact | Value | Status |
 |---|---|---|
 | Integration branch | `main` | Confirmed locally |
-| Initial baseline commit SHA | **NONE — current project worktree is untracked** | **BLOCKED — TL creates baseline by 28/07 11:30, before specialist start** |
+| Initial baseline commit SHA | `7bc1b8ad5528200a735653f580d25cecf1008536` | Confirmed on `main`; created 27/07/2026 before specialist work |
 | Specialist branch convention | `<role>/<task-id>-<short-name>` | Defined in `CONTRIBUTING.md`; team acknowledgement pending |
 | CI mode | **BLOCKED — TL chooses GitHub CI or local-only by 29/07 12:00** | Open |
 | Remote repository URL/access | **BLOCKED — TL confirms before first push** | Open |

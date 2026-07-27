@@ -4,7 +4,7 @@
 > **Last updated:** 27/07/2026  
 > **Official deadline:** End of 21/08/2026  
 > **Internal upload-ready deadline:** 20/08/2026 18:00 ICT  
-> **Current onboarding status:** **BLOCKED ON NAMED ROSTER, HUMAN FACTS AND BASELINE COMMIT**
+> **Current onboarding status:** **BLOCKED ON NAMED ROSTER AND HUMAN FACTS**
 
 This is the one-page entry point for every team member. Work from the
 `say-it-for-me/` repository root, and resolve every path below from that root.
@@ -36,8 +36,8 @@ code/document edit should begin. The specialist card start time is
 
 Onboarding banner states:
 
-- `BLOCKED ON NAMED ROSTER, HUMAN FACTS AND BASELINE COMMIT`: nobody is ready
-  to edit yet.
+- `BLOCKED ON NAMED ROSTER AND HUMAN FACTS`: the baseline exists, but nobody
+  is assigned or ready to edit until TL completes the named mapping.
 - `ROSTER ASSIGNED — GATE 0 REVIEW PENDING`: named specialists may begin their
   dated card checkpoints; TL's Gate 0 card is still under APP review.
 - `READY — GATE 0 PASS`: APP passed the facts/assignment review and TL closed

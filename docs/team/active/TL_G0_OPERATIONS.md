@@ -7,7 +7,9 @@
 - **Gate decision owner:** TL, only after APP records `PASS`
 - **Status:** BLOCKED — HUMAN_INPUT_REQUIRED
 - **Start / deadline:** 27/07/2026 18:00 ICT → 29/07/2026 12:00 ICT
-- **Checkpoints:** baseline commit by 28/07 11:30; roster/capacity by 12:00;
+- **Baseline completed:** `7bc1b8ad5528200a735653f580d25cecf1008536`
+  on `main`, 27/07/2026.
+- **Remaining checkpoints:** roster/capacity by 28/07 12:00;
   device/reviewer/consent facts by 17:30 ICT.
 
 ## Outcome

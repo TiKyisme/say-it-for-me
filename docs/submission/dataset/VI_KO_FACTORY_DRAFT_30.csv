@@ -1,0 +1,31 @@
+id,source_vi,draft_ko,domain,safety_critical,protected_tokens,provenance,rights_status,review_status,korean_reviewer_status
+factory-001,Dừng dây chuyền số 2.,2번 생산 라인을 멈추세요.,manufacturing-safety,true,2,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-002,Ngắt nguồn 220V trước khi bảo trì.,정비 전에 220V 전원을 차단하세요.,manufacturing-safety,true,220V,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-003,"Áp suất đang là 2.5 bar, hãy kiểm tra van.",압력이 2.5 bar입니다. 밸브를 점검하세요.,maintenance,true,2.5 bar,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-004,Lỗi E07 xuất hiện trên máy B-03.,기계 B-03에 오류 E07이 표시되었습니다.,quality,true,E07;B-03,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-005,Không khởi động máy A-17.,기계 A-17을 가동하지 마세요.,manufacturing-safety,true,A-17,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-006,Thay linh kiện M-102 sau khi khóa máy.,기계를 잠근 후 부품 M-102를 교체하세요.,maintenance,true,M-102,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-007,Hãy đeo kính bảo hộ trước khi vào khu vực này.,이 구역에 들어가기 전에 보안경을 착용하세요.,manufacturing-safety,true,,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-008,Nút dừng khẩn cấp ở bên trái bảng điều khiển.,비상 정지 버튼은 제어판 왼쪽에 있습니다.,manufacturing-safety,true,,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-009,Chờ 5 phút để máy nguội.,기계가 식을 때까지 5분 기다리세요.,manufacturing-safety,true,5,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-010,Nhiệt độ khuôn vượt quá 80°C.,금형 온도가 80°C를 초과했습니다.,manufacturing-safety,true,80°C,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-011,Kiểm tra số lượng 24 sản phẩm trong khay.,트레이에 있는 제품 24개의 수량을 확인하세요.,quality,false,24,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-012,Đưa mẫu QC-12 đến bộ phận chất lượng.,샘플 QC-12를 품질 부서로 보내세요.,quality,false,QC-12,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-013,Độ dày mục tiêu là 1.2 mm.,목표 두께는 1.2 mm입니다.,quality,false,1.2 mm,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-014,Đo lại chiều dài 350 mm.,길이 350 mm를 다시 측정하세요.,quality,false,350 mm,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-015,Lô K24-08 cần kiểm tra lần hai.,배치 K24-08은 두 번째 검사가 필요합니다.,quality,false,K24-08,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-016,Động cơ chạy không bình thường.,모터가 비정상적으로 작동합니다.,maintenance,false,,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-017,Cần thay bộ lọc F-09.,필터 F-09를 교체해야 합니다.,maintenance,false,F-09,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-018,Kiểm tra dầu bôi trơn ở bơm P-04.,펌프 P-04의 윤활유를 점검하세요.,maintenance,false,P-04,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-019,Van V-12 đang bị rò rỉ.,밸브 V-12에서 누출이 발생하고 있습니다.,maintenance,true,V-12,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-020,Cấp vật liệu cho máy ép số 3.,3번 프레스에 자재를 공급하세요.,operations,false,3,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-021,Đặt tốc độ băng tải là 1.5 m/s.,컨베이어 속도를 1.5 m/s로 설정하세요.,operations,false,1.5 m/s,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-022,Không chạm vào khu vực có điện.,전기가 있는 구역을 만지지 마세요.,manufacturing-safety,true,,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-023,Xác nhận cửa bảo vệ đã đóng.,안전문이 닫혔는지 확인하세요.,manufacturing-safety,true,,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-024,Ghi mã lỗi H-21 vào biên bản.,오류 코드 H-21을 기록지에 작성하세요.,quality,false,H-21,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-025,Khởi động lại sau khi hoàn thành kiểm tra.,점검이 끝난 후 다시 시작하세요.,operations,false,,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-026,Gọi kỹ sư nếu cảnh báo W03 xuất hiện lại.,경고 W03이 다시 표시되면 엔지니어를 호출하세요.,manufacturing-safety,true,W03,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-027,Đặt 6 hộp vào khu vực chờ.,대기 구역에 상자 6개를 놓으세요.,operations,false,6,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-028,Kiểm tra độ ẩm dưới 60%.,습도가 60% 미만인지 확인하세요.,quality,false,60%,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-029,Đã hoàn thành công đoạn số 4.,4번 공정을 완료했습니다.,operations,false,4,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned
+factory-030,Báo ngay nếu thấy mùi khét.,타는 냄새가 나면 즉시 보고하세요.,manufacturing-safety,true,,team-authored Phase 2 draft,team-authored draft; rights confirmation required,draft,not_assigned

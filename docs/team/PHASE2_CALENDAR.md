@@ -7,6 +7,12 @@
 > This calendar owns cross-team dependency milestones. A role prompt does not
 > extend either date.
 
+> **06/08/2026 recovery override:** named roles are now confirmed. Dates before
+> 06/08 are historical; the current task deadlines, ownership, acceptance
+> criteria, and evidence locations are in `PHASE2_RESCUE_TASKS_3_MEMBERS.md`.
+> The current M1 target is 10/08/2026 and the Phase 2 deadline remains
+> 21/08/2026.
+
 | Date | DRI(s) | Required output by end of day |
 |---|---|---|
 | **27/07 Mon** | TL / APP / ATE / AUD, each on own card | Playbook/prompts/cards; deadline recorded; evaluation foundation started; candidate/audio plans assigned |

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="850" viewBox="0 0 1500 850" role="img" aria-labelledby="title desc">
+  <title id="title">Say It For Me phone deployment architecture</title>
+  <desc id="desc">Layered smartphone deployment architecture. Android app, audio APIs, model runtime, local storage, and compute hardware are planned. The Python reference layer is implemented only as a PC architecture and evaluation foundation.</desc>
+  <style>
+    .title{font:700 30px Arial,sans-serif;fill:#11243a}.label{font:700 20px Arial,sans-serif;fill:#11243a}.sub{font:15px Arial,sans-serif;fill:#31465c}.small{font:14px Arial,sans-serif;fill:#31465c}.box{stroke:#28435f;stroke-width:2;rx:14;ry:14}.arrow{stroke:#526d87;stroke-width:3;fill:none;marker-end:url(#arrow)}
+  </style>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#526d87"/></marker></defs>
+  <rect width="1500" height="850" fill="#f7fafc"/>
+  <text x="55" y="60" class="title">Say It For Me — smartphone deployment architecture</text>
+  <text x="55" y="92" class="sub">All phone layers are target or candidate states until an exact handset and compatible models are verified.</text>
+  <g transform="translate(115,145)">
+    <rect class="box" width="1270" height="105" fill="#dbeafe"/><text x="635" y="38" text-anchor="middle" class="label">Android App Layer — PLANNED</text><text x="635" y="67" text-anchor="middle" class="sub">Explicit direction · push-to-talk · transcript · translation · FactorySafe warning / playback state</text>
+    <rect class="box" y="145" width="1270" height="105" fill="#dbeafe"/><text x="635" y="183" text-anchor="middle" class="label">Audio APIs — PLANNED</text><text x="635" y="212" text-anchor="middle" class="sub">Microphone capture · endpointing / VAD candidate · playback · format conversion</text>
+    <rect class="box" y="290" width="810" height="120" fill="#fff3cd"/><text x="405" y="332" text-anchor="middle" class="label">Model Runtime — CANDIDATE</text><text x="405" y="361" text-anchor="middle" class="sub">QAIRT / QNN where compatible · ONNX Runtime Mobile or CPU fallback</text><text x="405" y="386" text-anchor="middle" class="small">Model choice, precision, licensing, and latency remain evidence gates</text>
+    <rect class="box" x="850" y="290" width="420" height="120" fill="#fff3cd"/><text x="1060" y="332" text-anchor="middle" class="label">Local Model Storage — TARGET</text><text x="1060" y="361" text-anchor="middle" class="sub">Exact revisions · SHA-256 · license</text><text x="1060" y="386" text-anchor="middle" class="small">No runtime download by design</text>
+    <rect class="box" y="450" width="1270" height="115" fill="#dbeafe"/><text x="635" y="491" text-anchor="middle" class="label">Phone Hardware — DEVICE PROFILE BLOCKED</text><text x="635" y="520" text-anchor="middle" class="sub">CPU / GPU / NPU · RAM · local storage · integrated microphone · speaker / headset · battery · display</text><text x="635" y="544" text-anchor="middle" class="small">Exact phone, SoC, OS, capacity, power, thermal behavior, and device performance are not yet known</text>
+    <path class="arrow" d="M635 105V140M635 250V285M405 410V445M1060 410V445"/>
+  </g>
+  <g transform="translate(355,745)">
+    <rect class="box" width="790" height="70" fill="#dcfce7"/><text x="395" y="30" text-anchor="middle" class="label">Implemented PC Reference Foundation</text><text x="395" y="54" text-anchor="middle" class="sub">Typed contracts · mock pipeline · model-manifest controls · strict evaluator — not Android or real-model inference</text>
+  </g>
+</svg>

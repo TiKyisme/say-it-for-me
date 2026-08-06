@@ -1,6 +1,6 @@
 # APP Proposal Input
 
-> Owner: **[name]**  
+> Owner: **Hà Duy Lộc (APP)**  
 > Due: 16/08/2026  
 > Status: Not started
 
@@ -21,4 +21,3 @@
 - [ ] Official metrics exclude unreviewed/incompatible references.
 - [ ] UI labels mock, PC measured and target figures correctly.
 - [ ] All demo links and assets are accessible to judges.
-

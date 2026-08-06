@@ -1,6 +1,6 @@
 # ATE REVIEW — Gate 2 Evaluation Contract
 
-> **Reviewer:** ATE — UNASSIGNED  
+> **Reviewer:** ATE — Nguyễn Tiến Đạt  
 > **Status:** NOT_STARTED  
 > **Due:** 30/07/2026 11:00 ICT  
 > **Decision:** PENDING — `PASS` or `CHANGES_REQUESTED`

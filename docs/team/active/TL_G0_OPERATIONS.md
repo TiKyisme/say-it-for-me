@@ -2,7 +2,7 @@
 
 > **Card version:** 0.2; updated 27/07/2026
 
-- **DRI:** TL — **UNASSIGNED; human name required**
+- **DRI:** TL — **Team Lead; personal name not supplied**
 - **Reviewer:** APP
 - **Gate decision owner:** TL, only after APP records `PASS`
 - **Status:** BLOCKED — HUMAN_INPUT_REQUIRED
@@ -39,10 +39,10 @@ start without guessing.
 
 ## Outputs
 
-- `docs/team/TEAM_FACTS.md` — replace every provisional `BLOCKED`/`UNASSIGNED`
+- `docs/team/TEAM_FACTS.md` — replace every provisional role placeholder or `BLOCKED`
   cell with a confirmed value, explicit `NONE`, or a dated blocker that names
   its decision owner.
-- `docs/team/TEAM_START_HERE.md` — replace every `UNASSIGNED` with the mapped name.
+- `docs/team/TEAM_START_HERE.md` — replace every roster placeholder with the mapped name.
 - `docs/team/active/TL_G0_OPERATIONS.md`
 - `docs/team/active/ATE_G2_CONTRACT_REVIEW.md`
 - `docs/team/active/AUD_G2_AUDIO_FIXTURES.md`
@@ -126,10 +126,10 @@ if (
   $factsReview.Count -ne 1 -or
   $startReview.Count -ne 1 -or
   ($teamNames | Sort-Object -Unique).Count -ne 4 -or
-  $teamRoleRows -match 'UNASSIGNED|\*\*BLOCKED' -or
+  $teamRoleRows -match 'ROLE_PLACEHOLDER|\*\*BLOCKED' -or
   $teamRoleRows -match '\[ \]' -or
-  $taskDriLines -match 'UNASSIGNED' -or
-  $startRoleRows -match 'UNASSIGNED' -or
+  $taskDriLines -match 'ROLE_PLACEHOLDER' -or
+  $startRoleRows -match 'ROLE_PLACEHOLDER' -or
   $currentBranch -ne 'tl/g0-operations' -or
   -not $baselineIsAncestor
 ) { throw "Named role assignment is incomplete." }

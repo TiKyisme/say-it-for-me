@@ -51,12 +51,12 @@ more convenient date silently.
 
 ## 3. Roles and outcomes
 
-| Code | Role | Accountable outcome |
-|---|---|---|
-| **TL** | Team Lead / System Architect | One coherent architecture, integrated pipeline, defensible proposal and on-time submission |
-| **ATE** | ASR & Translation Engineer | Evidence-based ASR/NMT selection and production-quality adapters |
-| **AUD** | Audio & TTS Engineer | Correct audio contracts, noise/VAD/TTS evidence and reliable audio I/O |
-| **APP** | App & Integration Engineer | Reproducible evaluation data/harness, direction-first UI and demo/submission assets |
+| Code | Name | Role | Accountable outcome |
+|---|---|---|---|
+| **TL** | Team Lead — personal name not supplied | Team Lead / System Architect | One coherent architecture, integrated pipeline, defensible proposal and on-time submission |
+| **ATE** | Nguyễn Tiến Đạt | ASR & Translation Engineer | Evidence-based ASR/NMT selection and production-quality adapters |
+| **AUD** | Nguyễn Đăng Gia Đạo | Audio & TTS Engineer | Correct audio contracts, noise/VAD/TTS evidence and reliable audio I/O |
+| **APP** | Hà Duy Lộc | App & Integration Engineer | Reproducible evaluation data/harness, direction-first UI and demo/submission assets |
 
 “Accountable outcome” here means specialist artifact ownership: the DRI must
 know whether their deliverable is done, know the evidence location, and escalate

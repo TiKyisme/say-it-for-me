@@ -2,7 +2,7 @@
 
 > **Card version:** 0.2; updated 27/07/2026
 
-- **DRI:** ATE — **UNASSIGNED; human name required**
+- **DRI:** ATE — **Nguyễn Tiến Đạt**
 - **Reviewer / gate decision owner:** TL
 - **Status:** NOT_STARTED
 - **Start / DRI handoff deadline:** 28/07/2026 12:00 ICT → 30/07/2026 11:00 ICT

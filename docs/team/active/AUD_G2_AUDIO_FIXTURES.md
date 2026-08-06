@@ -2,7 +2,7 @@
 
 > **Card version:** 0.2; updated 27/07/2026
 
-- **DRI:** AUD — **UNASSIGNED; human name required**
+- **DRI:** AUD — **Nguyễn Đăng Gia Đạo**
 - **Reviewer:** ATE
 - **Gate decision owner:** TL after ATE records `PASS`
 - **Status:** NOT_STARTED

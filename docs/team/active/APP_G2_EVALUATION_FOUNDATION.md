@@ -2,7 +2,7 @@
 
 > **Card version:** 0.2; updated 27/07/2026
 
-- **DRI:** APP — **UNASSIGNED; human name required**
+- **DRI:** APP — **Hà Duy Lộc**
 - **Reviewer:** ATE
 - **Gate decision owner:** TL after ATE records `PASS`
 - **Status:** REVIEW

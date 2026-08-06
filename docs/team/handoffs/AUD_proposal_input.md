@@ -1,6 +1,6 @@
 # AUD Proposal Input
 
-> Owner: **[name]**  
+> Owner: **Nguyễn Đăng Gia Đạo (AUD)**  
 > Due: 16/08/2026  
 > Status: Not started
 
@@ -21,4 +21,3 @@
 - [ ] Every number links to raw evidence.
 - [ ] Exact voice model card/license is recorded.
 - [ ] Korean intelligibility approval names the reviewer/status/date.
-

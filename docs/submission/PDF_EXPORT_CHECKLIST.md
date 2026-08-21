@@ -1,8 +1,7 @@
 # PDF Export Preflight — Say It For Me Phase 2
 
-Repository content preflight completed 21/08/2026. This does not represent a
-PDF export: the official Google Doc master was not accessible through the
-connected Drive account.
+Native Google Doc export and visual QA completed 21/08/2026 from the official
+master `[OneVoiceAI]_Team` (`1U2WtG04g65TJ7qiwy103DPnqt7zyytY-n7vO5waxvhM`).
 
 | Check | Status | Evidence / next handling |
 | :--- | :--- | :--- |
@@ -12,11 +11,10 @@ connected Drive account.
 | Required diagrams | PASS | Software pipeline and smartphone deployment SVGs are present and state-labelled. |
 | Public diagnostic audio provenance | PASS WITH NO INPUT | `evidence/demo/input_provenance.md` records the authoritative CC0 source check and that no clip was added. |
 | Repository validation | PASS | `git diff --check` and unit-test gate run at closeout. |
-| Official Google Doc master located/read | BLOCKED | `@[OneVoiceAI]_Team` is not returned by connected Drive search or the project folder listing; its URL/ID is required to preserve/edit its native template safely. |
-| Native Google Doc PDF export | BLOCKED | Requires access to the official master document. |
-| Ten-page rendered PDF visual QA | BLOCKED | Can only follow a successful native export; do not claim a page or glyph check before it exists. |
+| Official Google Doc master located/read | PASS | The specified native master was read and edited in place without copying or recreating its template. |
+| Native Google Doc PDF export | PASS | `SayItForMe_Phase2_Final.pdf` is the direct `application/pdf` export (1,023,482 bytes). |
+| Ten-page rendered PDF visual QA | PASS | 10 pages rendered and individually inspected: header/footer, page numbers, tables, diagrams, line breaks and final checklist display correctly. |
 | Portal upload | HUMAN ACTION | The authorised uploader must use the organiser portal rules and save the submission receipt. |
 
-When the master URL/ID is provided, export it as `application/pdf`, rasterize
-every page, and inspect page fit, diagrams, tables, Vietnamese/Korean glyphs,
-links, headers/footers and page numbering before upload.
+The exported PDF is ready for the authorised uploader to submit through the
+organiser portal and retain the receipt.

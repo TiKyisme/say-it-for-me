@@ -1,6 +1,6 @@
 # Claim–Evidence Map — Say It For Me
 
-Last updated: 06/08/2026. This is the wording gate for the working proposal. A claim may be promoted to `MEASURED` only when it has a reproducible artifact, raw output, environment details, and a scope-consistent interpretation.
+Last updated: 21/08/2026. This is the wording gate for the working proposal. A claim may be promoted to `MEASURED` only when it has a reproducible artifact, raw output, environment details, and a scope-consistent interpretation.
 
 | Claim | Proposal Section | Type | Evidence | Status | Allowed Wording |
 | :--- | :--- | :--- | :--- | :--- |
@@ -14,9 +14,12 @@ Last updated: 06/08/2026. This is the wording gate for the working proposal. A c
 | The repository has a model-manifest/checksum/lazy-load foundation. | 1, 4, 6 | Measured result | `model_store.py`, model-store tests | CONFIRMED | “The reference foundation provides manifest, checksum, path, and lazy-load controls.” |
 | The repository has an approved-only evaluation gate. | 1, 4 | Measured result | evaluation contract and tests | CONFIRMED | “The evaluator excludes non-approved records by default.” |
 | 32 repository tests passed. | 1, 4 | Measured result | 06/08/2026 command output; 32 tests, 0.357 s | MEASURED | “32 contract/evaluator tests passed on the recorded environment.” |
+| 39 repository tests passed with 3 optional inference-smoke skips. | 1, 4, 6 | Measured result | 21/08/2026 `PYTHONPATH=src python -m unittest discover -s tests -v` output | MEASURED | “39 unit tests passed; three real-inference smoke tests were intentionally skipped because they require optional local dependencies/models.” |
 | The 32 passing tests prove a working AI translator. | 1, 4 | Hypothesis | Mock-only pipeline audit | NOT SUPPORTED | “The tests do not demonstrate ASR, NMT, TTS, quality, latency, offline operation, or phone deployment.” |
-| The pipeline uses real ASR, NMT, and Korean TTS. | 1, 4 | Hypothesis | Context log and `stages/mock.py` | NOT SUPPORTED | “These stages are candidates / planned; the current adapters are mocks.” |
-| Real WAV input and output work. | 4 | Hypothesis | No WAV I/O code | NOT SUPPORTED | “WAV I/O is a near-term technical milestone.” |
+| Real ASR and NMT adapter implementations exist. | 1, 4, 6 | Code implementation | PR #3 merge `d6a2944`; `asr_real.py`, `nmt_real.py`, adapter tests | IMPLEMENTED | “The repository implements real ASR and NMT adapters; no successful real-audio inference has yet been recorded.” |
+| A real VI→KO WAV→transcript→Korean-text run succeeded. | 1, 4, 6 | Measured result | `evidence/demo/run.json` records missing input before model load | BLOCKED | “A reproducible CLI exists, but a consented Vietnamese WAV is required before this run can be measured.” |
+| Real WAV input is validated by the demo CLI. | 4 | Code implementation | `demo_cli.py`; `test_demo_cli.py`; `evidence/demo/run.json` | IMPLEMENTED | “The demo CLI accepts only mono 16 kHz PCM-16 WAV and fails explicitly when the input is missing or incompatible.” |
+| Korean TTS output works. | 1, 4 | Measured result | No TTS adapter or Korean WAV | NOT IMPLEMENTED | “Korean TTS is not implemented in this repository snapshot.” |
 | Fully offline runtime has been achieved. | 1, 2, 6 | Target | No network-disabled run | NOT MEASURED | “The architecture targets offline runtime after provisioning; verification is pending.” |
 | Post-utterance first audio is below 3 seconds. | 1, 2, 4 | Target | Evidence register E-002 | NOT MEASURED | “The design target is under 3 seconds.” |
 | Memory fits the phone. | 4, 5 | Target | No phone or RSS evidence | NOT MEASURED | “Memory will be measured on the selected phone; current controls are design measures.” |

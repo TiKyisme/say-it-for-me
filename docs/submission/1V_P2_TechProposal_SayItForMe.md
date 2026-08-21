@@ -4,8 +4,8 @@
 
 | Team / Project Name | Say It For Me / **TBD — AI/Technical Lead must add the verified team name before the content freeze on 18/08/2026.** |
 | :--- | :--- |
-| Submission Date | Working draft updated 06/08/2026; **TBD — submission owner must enter the actual submission date after portal submission.** |
-| Version | v0.1 — evidence-backed working submission |
+| Submission Date | Working draft updated 21/08/2026; **TBD — submission owner must enter the actual submission date after portal submission.** |
+| Version | v0.2 — evidence-backed working submission |
 | Confidentiality | Restricted — Challenge Review Only |
 
 ### Evidence and wording policy
@@ -30,7 +30,7 @@ Say It For Me addresses an initial problem hypothesis for Vietnamese operators a
 
 The proposed solution is a smartphone-based, offline-first Vietnamese–Korean voice-translation application. A user explicitly selects the direction, uses push-to-talk, sees the transcript and translation, and receives target-language audio only after validation. The device concept deliberately uses existing smartphone hardware—microphone, speaker or headset, battery, display, storage, and SoC—rather than a custom enclosure. The exact phone, operating system, and SoC are not yet confirmed, so no phone performance or battery-life result is claimed.
 
-Its proposed differentiator is the **FactorySafe Translation Guard**: a validation layer designed to preserve numbers, units, machine codes, and part IDs; use reviewed phrases where available; show text before audio; and request repetition rather than play a result that fails a safety check. The repository already contains explicit-direction contracts, a bounded VAD-oriented segmenter, a mock pipeline, model-manifest safeguards, and an evaluation framework. Real ASR, Vietnamese–Korean NMT, Korean TTS, WAV I/O, offline verification, and mobile integration remain unimplemented. The Phase 2 engineering target is sub-three-second post-utterance first translated audio, to be measured separately on PC and on the selected phone.
+Its proposed differentiator is the **FactorySafe Translation Guard**: a validation layer designed to preserve numbers, units, machine codes, and part IDs; use reviewed phrases where available; show text before audio; and request repetition rather than play a result that fails a safety check. The repository already contains explicit-direction contracts, a bounded VAD-oriented segmenter, a mock pipeline, model-manifest safeguards, an evaluation framework, real ASR/NMT adapters, and a strict file-demo entry point. Korean TTS, a successful real-audio run, offline verification, and mobile integration remain unimplemented or unmeasured. The Phase 2 engineering target is sub-three-second post-utterance first translated audio, to be measured separately on PC and on the selected phone.
 
 ### 1.1 Problem Overview
 
@@ -143,15 +143,15 @@ Member 1 must replace the validation language above with cited findings from int
 
 ### 4.1 System Pipeline Overview
 
-**Status: Existing repository covers explicit direction and mock orchestration; real audio/model stages are PROPOSED.**
+**Status: MIXED — explicit-direction contracts, real ASR/NMT adapter code, and a strict VI→KO demo CLI are IMPLEMENTED; no successful real-audio inference is MEASURED.**
 
 ![Software pipeline and implementation state](diagrams/software_pipeline.svg)
 
 The desired Phase 2 Vietnamese → Korean path is: microphone → audio capture → **VAD detector / endpointing (planned)** → ASR → FactorySafe pre-translation validation → Vietnamese–Korean NMT → FactorySafe post-translation protected-token check → Korean TTS → speaker and display. Before NMT, the proposed guard rejects empty text, validates the selected direction, and extracts protected tokens. After NMT, it compares required tokens with the translated output and applies a block/warn/repeat policy before any TTS request. A reviewed phrasebook may be offered only for an explicitly matched reviewed phrase. These guard rules are proposed, not implemented.
 
-The current Python reference slice accepts a 48 kHz `AudioBuffer`, invokes a passthrough mock denoiser, resamples to 16 kHz, applies scripted mock ASR, dictionary mock translation, and a 440 Hz tone synthesizer. It records stage timing and rejects transcript or translation language outputs that conflict with the explicitly selected direction, but it does **not** capture audio, read or write WAV files, run a VAD model, infer ASR/NMT/TTS, enforce FactorySafe runtime rules, or play speech. The diagram labels these states to avoid implying an implemented phone system.
+The original Python reference slice accepts a 48 kHz `AudioBuffer`, invokes a passthrough mock denoiser, resamples to 16 kHz, applies scripted mock ASR, dictionary mock translation, and a 440 Hz tone synthesizer. Separately, `WhisperRecognizer` uses faster-whisper/CTranslate2 and `NllbTranslator`/`M2M100Translator` use Transformers/PyTorch with explicit language codes; these are real inference adapters, not mock fallbacks. `demo_cli` reads only a supplied mono 16 kHz PCM-16 WAV and writes transcript, translation, and run metadata only after successful real inference. Its 21/08/2026 run recorded a missing-input failure before model loading because no consented Vietnamese WAV was available. The repository therefore does **not** yet demonstrate ASR/NMT output, Korean TTS, FactorySafe runtime enforcement, offline execution, or phone operation.
 
-**Direct repository evidence snapshot:** the recorded 06/08/2026 test run passed 32 contract/evaluator tests in 0.357 seconds; the reproducible command and result scope are linked in [`TEST_2026-08-06.md`](evidence/TEST_2026-08-06.md). The result supports the reference architecture and evaluator only, not an AI-product performance claim.
+**Direct repository evidence snapshot:** `PYTHONPATH=src python -m unittest discover -s tests -v` passed 39 tests with 3 intentional inference-smoke skips on 21/08/2026. The test gate supports contracts, adapter boundary handling, and the strict WAV loader; it is not ASR/NMT quality, latency, offline, TTS, or phone evidence. The reproducible missing-input artifact is in [`evidence/demo/run.json`](evidence/demo/run.json).
 
 ### 4.2 Module-by-Module Design
 
@@ -161,9 +161,9 @@ The current Python reference slice accepts a 48 kHz `AudioBuffer`, invokes a pas
 | :--- | :--- | :--- | :--- | :--- |
 | Audio capture / endpointing | Android audio API plus VAD candidate | TBD after selection | Endpointing uses a 400 ms silence design setting | VAD-oriented 20 ms segmentation, 200 ms pre-roll, and 8 s maximum are implemented; a VAD detector and phone capture are not. |
 | Noise handling | Bypass baseline; denoiser candidate later | TBD | Included only if evidence supports it | Do not assume noise suppression helps; compare on/off with identical noisy clips. |
-| ASR | Whisper Tiny/Base are inventory-only candidates | TBD | Target allocation: ≤900 ms p50 | Fixed source language. No exact checkpoint, inference runtime, or ASR result exists. |
+| ASR | **IMPLEMENTED adapter:** Whisper Tiny/Base via faster-whisper/CTranslate2; Tiny is provisional demo baseline | Candidate artifacts not provisioned in this run | Target allocation: ≤900 ms p50 | Adapter enforces 16 kHz mono input and explicit VI/KO code. No real Vietnamese WAV, transcript, quality, or latency result exists. |
 | FactorySafe validation | Deterministic rules plus reviewed phrasebook | Small local rules/data; TBD | Target allocation: ≤100 ms p50 | Proposed token extraction, validation, and warn/block policy. |
-| VI–KO NMT | NLLB-200 distilled 600M; M2M100 or bilingual fallback are inventory-only candidates | TBD | Target allocation: ≤900 ms p50 | Select only after language-path, quality, latency, memory, and license gates. |
+| VI–KO NMT | **IMPLEMENTED adapters:** NLLB-200 distilled 600M and M2M100-418M via Transformers/PyTorch | Candidate artifacts not provisioned in this run | Target allocation: ≤900 ms p50 | NLLB uses `vie_Latn`→`kor_Hang`; M2M100 uses `vi`→`ko`. M2M100 is the provisional MIT-license demo baseline; this is risk management, not a quality selection. |
 | Protected-token check | Existing evaluator metric; pipeline integration proposed | Small local rules/data; TBD | Included with validation | The metric exists; runtime enforcement does not. |
 | Korean TTS | Korean checkpoint candidate not yet identified | TBD | Target first audio: ≤500 ms p50 | Must record exact checkpoint, license, runtime, and Korean listener review. |
 | Vietnamese TTS for KO–VI | No candidate selected | TBD | No Phase 2 target until Vietnamese → Korean evidence is complete | Required before any Korean → Vietnamese spoken-output claim. |
@@ -181,7 +181,7 @@ The proposed mobile path is to package only required local language assets, load
 
 ### 4.4 Robustness & Edge Case Handling
 
-**Status: MIXED — explicit direction and deterministic pipeline errors are implemented; all model-dependent behavior is PROPOSED.**
+**Status: MIXED — explicit direction, ASR 16 kHz rejection, NMT same-language rejection, and missing-input failure recording are implemented; real speech/model outcomes and all quality claims remain blocked.**
 
 | Challenge | Current or Proposed Handling | Evidence State |
 | :--- | :--- | :--- |
@@ -193,6 +193,7 @@ The proposed mobile path is to package only required local language assets, load
 | Accents, dialects, code switching | Log failures; do not auto-reverse direction; evaluate only after reviewed audio is available. | PROPOSED |
 | Protected token failure | Warn/block playback and request repetition when tokens are absent or validation fails. | PROPOSED; evaluator metric exists |
 | TTS failure | Keep visible translated text and return a stable error; do not fabricate spoken output. | PROPOSED |
+| Missing WAV / unsupported format | `demo_cli` rejects absent, non-mono, non-16 kHz, compressed, empty, or non-PCM-16 inputs before model loading and records a structured failure in `run.json`. | IMPLEMENTED boundary behavior; no real-audio inference result |
 
 ## 5. Hardware & Device Concept
 
@@ -235,7 +236,7 @@ Power-budget reasoning is deliberately measurement-led. For a test window, avera
 
 ### 6.1 Software Stack
 
-**Status: Existing Python reference components are CONFIRMED; Android/mobile components are PROPOSED.**
+**Status: Existing Python reference components and PC-only real-adapter code are IMPLEMENTED; Android/mobile components are PROPOSED.**
 
 | Layer | Component / Framework | Role |
 | :--- | :--- | :--- |
@@ -244,7 +245,7 @@ Power-budget reasoning is deliberately measurement-led. For a test window, avera
 | Audio processing | **PROPOSED:** Android audio APIs plus a VAD candidate; optional denoise candidate only after evaluation. | Capture, endpointing, playback, and format conversion. |
 | AI runtime | **CANDIDATE:** QAIRT/QNN if model/device compatible; ONNX Runtime Mobile or CPU fallback evaluated per model. | On-device inference execution. |
 | Model serving | **CONFIRMED Python foundation; PROPOSED phone port:** local model pack with exact revisions, checksums, runtime, precision, and license metadata. | Provisioning, validation, lazy loading, and version control. |
-| Reference pipeline | **IMPLEMENTED reference only:** Python typed contracts, mock stages, evaluator, model-store logic, and CLI. | Reproducible architecture/evidence harness; not mobile/model inference. |
+| PC demo harness | **IMPLEMENTED, not yet successful:** typed contracts, mock stages, evaluator, model-store logic, real ASR/NMT adapters, and `demo_cli`. | The CLI has no mock fallback and recorded a missing-input failure; it is not mobile, real-audio, or model-performance evidence. |
 
 ### 6.2 Architecture Diagrams
 
@@ -297,7 +298,7 @@ Power-budget reasoning is deliberately measurement-led. For a test window, avera
 | 1 | Executive Summary written at 200–300 words | DRAFTED — verify word count after final team-name edit. |
 | 2 | Problem statement, target users, and constraints completed | DRAFTED — user research/site validation remains BLOCKED. |
 | 3 | Business solution completed with industry gap and differentiation | DRAFTED — competitor sources and interviews remain BLOCKED. |
-| 4 | AI pipeline documented with models, latency targets, and optimization strategy | DRAFTED — candidate metadata and all real-model evidence remain BLOCKED. |
+| 4 | AI pipeline documented with models, latency targets, and optimization strategy | DRAFTED — real adapter implementation and candidate metadata exist; successful real-model evidence remains BLOCKED. |
 | 5 | Hardware platform, smartphone BOM, and power reasoning completed | DRAFTED — exact phone profile and measured device data remain BLOCKED. |
 | 6 | Team profiles and timeline filled | Three specialist names/roles are filled; TL personal name, availability, and detailed expertise remain BLOCKED. |
 | 7 | Placeholder text removed; diagrams inserted | Diagrams inserted; final audit needed after human inputs replace all `TBD` items. |
@@ -306,5 +307,5 @@ Power-budget reasoning is deliberately measurement-led. For a test window, avera
 ## Source and Evidence Notes
 
 - Project state and technical evidence boundaries: [context log](https://docs.google.com/document/d/1cG663jvRsRXzXKcSi--YQF96w1e0rfAevKNiMZuDyJo/edit?tab=t.0), [`README.md`](../../README.md), [`evidence_register.md`](../evidence_register.md), and ADR-001 through ADR-003.
-- Measured repository evidence: [`TEST_2026-08-06.md`](evidence/TEST_2026-08-06.md) records `PYTHONPATH=src python -m unittest discover -s tests -v` on 06/08/2026: 32 tests passed in 0.357 s. This supports contracts/evaluator/model-store behavior only, not ASR/NMT/TTS, latency, offline operation, or phone deployment.
+- Current repository verification: `PYTHONPATH=src python -m unittest discover -s tests -v` on 21/08/2026 passed 39 tests with 3 intentional optional-inference skips. [`evidence/demo/README.md`](evidence/demo/README.md) and [`run.json`](evidence/demo/run.json) record the exact pending input and failure behavior. These artifacts do not support ASR/NMT quality, latency, offline operation, TTS, or phone-deployment claims.
 - The claim-level wording and open evidence gaps are maintained in [CLAIM_EVIDENCE_MAP.md](CLAIM_EVIDENCE_MAP.md). Proposal completeness ownership is maintained in [PROPOSAL_COMPLETION_MATRIX.md](PROPOSAL_COMPLETION_MATRIX.md).

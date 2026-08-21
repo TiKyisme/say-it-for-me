@@ -13,7 +13,7 @@ proposal section from an unmeasured future product capability.
 | 5 Hardware & Device Concept | 25% | COMPLETE | Proposed Snapdragon 8 Gen 3 Android class versus Snapdragon 7+ Gen 3 class, with Qualcomm sources; no handset benchmark, TOPS, TDP, RAM, battery or thermal result is claimed. |
 | 6 Architecture | — | COMPLETE | Current Python reference and proposed Android deployment are separated; two state-labelled diagrams are present. |
 | 7 Team & Timeline | 10% | COMPLETE | Verified four-member roster and completed Phase 2 / future Phase 3 milestones are filled. |
-| 8 Submission Checklist | — | COMPLETE WITH DELIVERY BLOCKER | Content, diagrams and wording gate are complete. Official Google Doc/PDF/export requires the inaccessible master document. |
+| 8 Submission Checklist | — | COMPLETE | Official Google Doc was completed in place; exact 10-page PDF export passed placeholder and visual QA. |
 
 ## Evidence status
 
@@ -24,7 +24,7 @@ proposal section from an unmeasured future product capability.
 | Repository tests | MEASURED | 39 passed; 3 intentional optional-inference skips on 21/08/2026. |
 | Real ASR→NMT output | NOT MEASURED | No qualifying Vietnamese clip was obtained; `run.json` is an input-validation failure, not an inference result. |
 | Korean TTS / phone / offline validation | LIMITATION | Phase 3 work; not required to complete the Phase 2 written proposal. |
-| Official Google Doc and upload-ready PDF | BLOCKED | The named master `@[OneVoiceAI]_Team` was not discoverable or accessible through connected Drive; no safe in-place edit or export is possible without its URL/ID. |
+| Official Google Doc and upload-ready PDF | MEASURED | Native master `[OneVoiceAI]_Team` (`1U2WtG04g65TJ7qiwy103DPnqt7zyytY-n7vO5waxvhM`) was edited in place and exported as `SayItForMe_Phase2_Final.pdf` (10 pages, 1,023,482 bytes). |
 
 ## Final content audit
 
@@ -32,3 +32,4 @@ proposal section from an unmeasured future product capability.
 - `software_pipeline.svg` and `phone_deployment_architecture.svg` visibly separate IMPLEMENTED, MEASURED and PROPOSED scope.
 - Claims are governed by [CLAIM_EVIDENCE_MAP.md](CLAIM_EVIDENCE_MAP.md).
 - `input_provenance.md` records the public-licensed diagnostic-audio search without claiming that audio was downloaded or inferred.
+- The final native export has 10 rendered pages, a zero-count placeholder-token audit, preserved header/footer/page numbering, and visual inspection of every page.

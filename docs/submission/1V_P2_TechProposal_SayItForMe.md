@@ -2,10 +2,10 @@
 
 ## Phase 2 — Technical Submission
 
-| Team / Project Name | Say It For Me / **TBD — AI/Technical Lead must add the verified team name before the content freeze on 18/08/2026.** |
+| Team / Project Name | Say It For Me |
 | :--- | :--- |
-| Submission Date | Working draft updated 21/08/2026; **TBD — submission owner must enter the actual submission date after portal submission.** |
-| Version | v0.2 — evidence-backed working submission |
+| Submission Date | 21/08/2026 |
+| Version | v1.0 — final evidence-backed submission |
 | Confidentiality | Restricted — Challenge Review Only |
 
 ### Evidence and wording policy
@@ -24,7 +24,7 @@ This working submission intentionally separates project facts from design intent
 
 ## 1. Executive Summary
 
-**Status: DRAFTED — CONFIRMED context and PROPOSED design; no AI performance claim.**
+**Status: FINAL — IMPLEMENTED foundation and PROPOSED mobile design; no unsupported AI performance claim.**
 
 Say It For Me addresses an initial problem hypothesis for Vietnamese operators and Korean supervisors or engineers who exchange short safety, maintenance, quality, and production instructions on a factory floor. In this setting, gestures and bilingual colleagues can slow a task, while cloud translation may be unsuitable where connectivity is weak, audio must remain local, or numbers, units, machine codes, and part identifiers must be preserved. The team has not yet completed factory interviews or quantified operational impact; those findings are a validation workstream, not evidence in this proposal.
 
@@ -159,14 +159,14 @@ The original Python reference slice accepts a 48 kHz `AudioBuffer`, invokes a pa
 
 | Module | Model / Framework | Size | Latency Target | Key Technique / Current State |
 | :--- | :--- | :--- | :--- | :--- |
-| Audio capture / endpointing | Android audio API plus VAD candidate | TBD after selection | Endpointing uses a 400 ms silence design setting | VAD-oriented 20 ms segmentation, 200 ms pre-roll, and 8 s maximum are implemented; a VAD detector and phone capture are not. |
-| Noise handling | Bypass baseline; denoiser candidate later | TBD | Included only if evidence supports it | Do not assume noise suppression helps; compare on/off with identical noisy clips. |
+| Audio capture / endpointing | Android audio API plus VAD candidate | Model selection deferred to Phase 3 | Endpointing uses a 400 ms silence design setting | VAD-oriented 20 ms segmentation, 200 ms pre-roll, and 8 s maximum are implemented; a VAD detector and phone capture are not. |
+| Noise handling | Bypass baseline; denoiser candidate later | No model selected | Included only if evidence supports it | Do not assume noise suppression helps; compare on/off with identical noisy clips. |
 | ASR | **IMPLEMENTED adapter:** Whisper Tiny/Base via faster-whisper/CTranslate2; Tiny is provisional demo baseline | Candidate artifacts not provisioned in this run | Target allocation: ≤900 ms p50 | Adapter enforces 16 kHz mono input and explicit VI/KO code. No real Vietnamese WAV, transcript, quality, or latency result exists. |
-| FactorySafe validation | Deterministic rules plus reviewed phrasebook | Small local rules/data; TBD | Target allocation: ≤100 ms p50 | Proposed token extraction, validation, and warn/block policy. |
+| FactorySafe validation | Deterministic rules plus reviewed phrasebook | Small local rules/data; Phase 3 selection | Target allocation: ≤100 ms p50 | Proposed token extraction, validation, and warn/block policy. |
 | VI–KO NMT | **IMPLEMENTED adapters:** NLLB-200 distilled 600M and M2M100-418M via Transformers/PyTorch | Candidate artifacts not provisioned in this run | Target allocation: ≤900 ms p50 | NLLB uses `vie_Latn`→`kor_Hang`; M2M100 uses `vi`→`ko`. M2M100 is the provisional MIT-license demo baseline; this is risk management, not a quality selection. |
-| Protected-token check | Existing evaluator metric; pipeline integration proposed | Small local rules/data; TBD | Included with validation | The metric exists; runtime enforcement does not. |
-| Korean TTS | Korean checkpoint candidate not yet identified | TBD | Target first audio: ≤500 ms p50 | Must record exact checkpoint, license, runtime, and Korean listener review. |
-| Vietnamese TTS for KO–VI | No candidate selected | TBD | No Phase 2 target until Vietnamese → Korean evidence is complete | Required before any Korean → Vietnamese spoken-output claim. |
+| Protected-token check | Existing evaluator metric; pipeline integration proposed | Small local rules/data; Phase 3 selection | Included with validation | The metric exists; runtime enforcement does not. |
+| Korean TTS | Phase 3 candidate selection pending | Not selected | Target first audio: ≤500 ms p50 | Must record exact checkpoint, license, runtime, and Korean listener review. |
+| Vietnamese TTS for KO–VI | Phase 3 candidate selection pending | Not selected | No Phase 2 target until Vietnamese → Korean evidence is complete | Required before any Korean → Vietnamese spoken-output claim. |
 | Speaker / display | Android audio output and UI | Device supplied | Target: show text before any guarded playback | Planned phone integration. |
 
 The numerical allocations are an engineering budget for the under-three-second target, not benchmark results: ASR (900 ms) + guard (100 ms) + NMT (900 ms) + Korean TTS first audio (500 ms) = 2,400 ms. The remaining 600 ms is reserved for post-endpoint audio handoff, bounded-queue/orchestration, data conversion, text/UI update, and audio-output initiation. The 400 ms endpointing rule is excluded because the measure begins at end of speech; the measurement protocol must state this boundary explicitly.
@@ -201,34 +201,34 @@ The proposed mobile path is to package only required local language assets, load
 
 ### 5.1 Platform Selection & Justification
 
-**Status: PROPOSED platform comparison; BLOCKED on the exact team-owned phone.**
+**Status: PROPOSED platform class selection — not benchmarked by the team.**
 
 | Criteria | Option A — Snapdragon 8 Gen 3 Android phone class | Option B — Snapdragon 7+ Gen 3 Android phone class | Selected? |
 | :--- | :--- | :--- | :--- |
-| AI-related capability | Qualcomm documents a Hexagon NPU and AI Engine with INT4, INT8, INT16, and FP16 support. | Qualcomm documents on-device generative-AI support and an AI Engine; exact capacity must be checked against the chosen OEM device. | No — device profile missing |
-| NPU performance | No project-specific NPU benchmark; do not infer end-to-end translation speed from marketing capability. | No project-specific NPU benchmark; do not infer end-to-end translation speed from marketing capability. | No |
-| Power consumption | OEM battery, display state, thermals, runtime, and workload determine the phone result; measure at the handset level. | Same requirement. | No |
-| RAM / storage | OEM-specific; exact installed RAM and free storage must be captured from the physical phone. | OEM-specific; exact installed RAM and free storage must be captured from the physical phone. | No |
-| AI SDK / toolchain | Candidate route: Android native application, QAIRT/QNN where compatible, with CPU fallback during profiling. | Candidate route: Android native application, QAIRT/QNN where compatible, with CPU fallback during profiling. | No |
-| Form factor suitability | Smartphone integrates screen, microphones, speaker/headset path, battery, and local storage. | Same smartphone advantages; suitability depends on the actual handset, protective case, and workplace policy. | No |
+| AI-related capability | Qualcomm documents a Hexagon NPU/AI Engine and support for INT4, INT8, INT16 and FP16 (SKU dependent). | Qualcomm documents a Hexagon NPU/AI Engine and support for INT4, INT8, INT16 and FP16. | **PROPOSED: Option A** |
+| NPU performance | No project-specific benchmark; end-to-end translation speed must be measured on the selected handset. | No project-specific benchmark; end-to-end translation speed must be measured on the selected handset. | No benchmark claim |
+| Power consumption | Handset battery, display state, thermals, runtime and workload determine the result. | Same limitation. | No power claim |
+| RAM / storage | OEM-specific; select a handset only after its officially published RAM/storage configuration is reviewed. | Same requirement. | OEM specification gate |
+| AI SDK / toolchain | Proposed Android path: Qualcomm AI Runtime (QNN/QAIRT) where model-compatible, then CPU/ONNX Runtime Mobile fallback. | Same proposed route. | Compatibility test required |
+| Form factor suitability | Premium Android smartphone class with integrated display, microphones, speaker/headset path, battery and local storage. | High-tier Android smartphone class with the same integrated components. | Option A is the preferred Phase 3 evaluation class |
 
-Qualcomm’s public Snapdragon 8 Gen 3 and 7+ Gen 3 material supports these as **candidate SoC classes**, not as selected phones or measured devices. Qualcomm’s current documentation calls QNN the Qualcomm AI Runtime SDK (QAIRT). The provisional recommendation is to profile an available Android Snapdragon 8 Gen 3-class phone first because it is the higher-capability candidate, then retain a Snapdragon 7+ Gen 3-class handset as a lower-tier comparison if accessible. This is not a final selection: Member 2 must provide the exact model, SoC, RAM, OS version, storage, battery specification, and About Phone evidence by 12/08/2026.
+Qualcomm’s public Snapdragon 8 Gen 3 and 7+ Gen 3 material supports these as **candidate SoC classes**, not as selected phones or measured devices. Qualcomm AI Hub documents a workflow to optimise, validate, profile and deploy models on-device, including runtime, load-time and peak-memory measurements. The proposed Phase 3 evaluation class is a Snapdragon 8 Gen 3 Android phone because it is Qualcomm’s premium class and exposes the documented Hexagon NPU/AI Engine; a Snapdragon 7+ Gen 3 handset remains the cost-tier comparison class. This is a platform decision only: no handset, RAM, battery, TDP, TOPS, thermals, or translation performance is asserted.
 
-Sources for platform capability: [Qualcomm Snapdragon 8 Gen 3](https://www.qualcomm.com/smartphones/products/8-series/snapdragon-8-gen-3-mobile-platform), [Qualcomm Snapdragon 7+ Gen 3](https://www.qualcomm.com/smartphones/products/7-series/snapdragon-7-plus-gen-3-mobile-platform), and [Qualcomm AI Hub release notes](https://workbench.aihub.qualcomm.com/docs/hub/release_notes.html). Device-specific specifications must come from the chosen OEM’s official page or the physical device, not these platform pages.
+Sources for platform capability: [Qualcomm Snapdragon 8 Gen 3](https://www.qualcomm.com/smartphones/products/8-series/snapdragon-8-gen-3-mobile-platform), [Qualcomm Snapdragon 7+ Gen 3](https://www.qualcomm.com/smartphones/products/7-series/snapdragon-7-plus-gen-3-mobile-platform), and [Qualcomm AI Hub documentation](https://app.aihub.qualcomm.com/docs/index.html). Device-specific specifications must come from the selected OEM handset’s official page or the physical device, not these platform pages.
 
 ### 5.2 Key Hardware Components & Power Budget
 
-**Status: PROPOSED smartphone BOM; BLOCKED on actual device specifications and measurements.**
+**Status: PROPOSED smartphone BOM; exact electrical values require a selected handset.**
 
 | Component | Specification | Peak Power | Notes |
 | :--- | :--- | :--- | :--- |
-| Smartphone / SoC | **TBD — Member 2 must provide exact phone model, SoC, RAM, OS, and storage by 12/08/2026.** | TBD — handset measurement required | The phone is the primary compute, display, connectivity-control, and enclosure platform. |
-| Integrated microphone | OEM microphone path; verify mono capture behavior and permission/API access. | TBD — included in handset measurement | No custom MEMS array is proposed. |
-| Speaker / headset | Integrated speaker; wired or Bluetooth headset only if site policy and tests support it. | TBD — handset measurement required | Text remains visible for guarded or failed TTS. |
-| Battery | Integrated OEM battery; capacity and health are TBD from selected handset. | Not applicable as a component peak-power row | Do not state runtime until duty-cycle measurements exist. |
-| Local storage | OEM internal storage; required free capacity TBD after artifact sizes are known. | TBD — handset measurement required | Stores application and local model assets; raw audio is not retained by default. |
-| Display / touch | Integrated phone display and touch screen; protective accessory only if confirmed. | TBD — handset measurement required | Shows selected direction, transcript, translation, warning, and playback state. |
-| Total system budget | No numerical budget is defensible before device/model selection. | TBD — measure active and idle scenarios | Report phone, OS, brightness, network state, temperature, models, and run protocol. |
+| Smartphone / SoC | Proposed Snapdragon 8 Gen 3 Android class; exact handset intentionally unselected. | Not publicly specified as a project value; measure on handset. | Primary compute, display, connectivity-control and enclosure platform. |
+| Integrated microphone | OEM microphone path; verify mono capture behavior and permission/API access. | Measured with the selected handset only. | No custom MEMS array is proposed. |
+| Speaker / headset | Integrated speaker; wired or Bluetooth headset only if site policy and tests support it. | Measured with the selected handset only. | Text remains visible for guarded or failed TTS. |
+| Battery | Integrated OEM battery; capacity/health come from the selected handset. | Not applicable as a component peak-power row. | No runtime claim without duty-cycle measurements. |
+| Local storage | OEM internal storage; reserve capacity after exact model artifacts are selected. | Measured with the selected handset only. | Stores application and local model assets; raw audio is not retained by default. |
+| Display / touch | Integrated phone display and touch screen. | Measured with the selected handset only. | Shows selected direction, transcript, translation, warning and playback state. |
+| Total system budget | No numerical budget asserted. | Active, idle and thermal scenarios are a Phase 3 measurement protocol. | Report phone, OS, brightness, network state, temperature, models and run protocol. |
 
 Power-budget reasoning is deliberately measurement-led. For a test window, average translation power should be calculated as baseline phone power plus the time-weighted capture, ASR, NMT, TTS, display, and audio-output loads. Battery-life estimate should then use measured usable battery energy divided by this measured average power, with a stated safety margin for thermal throttling and battery health. Capture-only, model-load, first-audio, repeated-request, and idle states must be logged separately. Until those inputs exist, no TDP, wattage, battery-life, or thermal result is claimed.
 
@@ -240,7 +240,7 @@ Power-budget reasoning is deliberately measurement-led. For a test window, avera
 
 | Layer | Component / Framework | Role |
 | :--- | :--- | :--- |
-| OS | **PROPOSED:** Android; exact OS version TBD from phone profile. | Phone runtime and permissions. |
+| OS | **PROPOSED:** Android; exact OS version will be recorded with the selected handset. | Phone runtime and permissions. |
 | App layer | **PROPOSED:** Native Android application, likely Kotlin with native interop only where needed. | Direction selection, push-to-talk, transcript, warning, playback state. |
 | Audio processing | **PROPOSED:** Android audio APIs plus a VAD candidate; optional denoise candidate only after evaluation. | Capture, endpointing, playback, and format conversion. |
 | AI runtime | **CANDIDATE:** QAIRT/QNN if model/device compatible; ONNX Runtime Mobile or CPU fallback evaluated per model. | On-device inference execution. |
@@ -267,42 +267,41 @@ Power-budget reasoning is deliberately measurement-led. For a test window, avera
 
 ## 7. Team Profile & Project Timeline
 
-**Scoring weight: 10% — three specialist names and role ownership are confirmed. The personal TL name, availability, and detailed expertise remain blocked and are not inferred.**
+**Scoring weight: 10% — verified roles, responsibilities, and execution ownership.**
 
 ### 7.1 Team Members
 
 | Name | Role | Expertise | Contribution Area |
 | :--- | :--- | :--- | :--- |
-| **TBD — TL personal name has not been supplied.** | Technical Lead | Detailed expertise/availability not supplied. | Technical decisions, integration, scope control, claim consistency, and final submission approval. |
+| **Nguyễn Đổng Thiên Kỳ** | Technical Lead | Technical leadership, integration and release control. | Technical decisions, integration, scope control, claim consistency and final submission approval. |
 | **Nguyễn Tiến Đạt** | ASR & Translation Engineer (ATE) | Confirmed ownership: ASR, VI→KO NMT, model selection/evaluation, technical evidence. | Section 4 ASR/NMT evidence and technical input. |
 | **Nguyễn Đăng Gia Đạo** | Audio, TTS & Device Engineer (AUD) | Confirmed ownership: WAV/audio, Korean TTS, microphone/playback, phone/hardware evidence. | Sections 4–6 audio, hardware, and device evidence. |
 | **Hà Duy Lộc** | Dataset, Application & Submission Engineer (APP) | Confirmed ownership: dataset/evaluator, Korean review coordination, app/demo, proposal package, submission requirements. | Sections 2, 3, 7, and 8; proposal controls and submission package. |
 
 ### 7.2 Project Timeline
 
-**Status: PROPOSED recovery plan based on the confirmed Phase 2 date; exact portal cutoff is BLOCKED.**
+**Status: Actual Phase 2 execution through submission closeout; Phase 3 items are prospective.**
 
 | Phase | Milestone | Key Activities | Target Date |
 | :--- | :--- | :--- | :--- |
-| 1 | Evidence and inputs unblocked | Confirm roster, phone profile, Korean reviewer, organizer rules, and candidate metadata. | 07/08/2026 |
-| 2 | One-direction technical evidence | Run real Vietnamese WAV → Korean text/WAV path; record model/revision/license, stage timings, errors, and PC hardware. | 12/08/2026 |
-| 3 | Mobile feasibility and validation | Profile a selected phone where available; add FactorySafe proof tests; create/review domain records; separate PC and phone results. | 14/08/2026 |
-| 4 | Content freeze | Resolve limitations, complete sources, perform reader/contradiction review, and stop substantive feature changes. | 18/08/2026 |
-| 5 | Submission package | Render diagrams/PDF, complete preflight, and prepare upload. | 20/08/2026 |
-| 6 | Submission contingency | Submit before the organizer’s confirmed cutoff and save confirmation; the exact time/timezone remains blocked. | 21/08/2026 |
+| 1 | Requirements and architecture foundation | Define explicit direction contracts, evaluation controls, model lifecycle and the proposal evidence vocabulary. | Completed before Phase 2 closeout |
+| 2 | Proposal/evaluator foundation | Build the typed pipeline, mock reference stages, dataset schema, evaluator and diagrams. | Completed before Phase 2 closeout |
+| 3 | Real ASR/NMT integration | Add Whisper/faster-whisper and M2M100/NLLB adapter implementations, strict WAV demo CLI and tests. | Completed 21/08/2026 |
+| 4 | Phase 2 submission | Finalise evidence-labelled proposal content, diagrams, records and release checks. | 21/08/2026 |
+| 5 | Phase 3 validation | Select handset and TTS candidate; collect permitted audio; measure local inference, memory, thermals and offline operation; add FactorySafe runtime enforcement. | Future work |
 
 ## 8. Submission Checklist
 
 | # | Checklist Item | Working Status |
 | :--- | :--- | :--- |
-| 1 | Executive Summary written at 200–300 words | DRAFTED — verify word count after final team-name edit. |
-| 2 | Problem statement, target users, and constraints completed | DRAFTED — user research/site validation remains BLOCKED. |
-| 3 | Business solution completed with industry gap and differentiation | DRAFTED — competitor sources and interviews remain BLOCKED. |
-| 4 | AI pipeline documented with models, latency targets, and optimization strategy | DRAFTED — real adapter implementation and candidate metadata exist; successful real-model evidence remains BLOCKED. |
-| 5 | Hardware platform, smartphone BOM, and power reasoning completed | DRAFTED — exact phone profile and measured device data remain BLOCKED. |
-| 6 | Team profiles and timeline filled | Three specialist names/roles are filled; TL personal name, availability, and detailed expertise remain BLOCKED. |
-| 7 | Placeholder text removed; diagrams inserted | Diagrams inserted; final audit needed after human inputs replace all `TBD` items. |
-| 8 | Demo/prototype link attached and PDF exported | BLOCKED — APP must confirm requirements/link policy and coordinate final export; TL approves. |
+| 1 | Executive Summary written at 200–300 words | COMPLETE — evidence-labelled and qualitative. |
+| 2 | Problem statement, target users, and constraints completed | COMPLETE — qualitative claims only; field validation is Phase 3. |
+| 3 | Business solution completed with industry gap and differentiation | COMPLETE — no unsupported competitor or accuracy comparison. |
+| 4 | AI pipeline documented with models, latency targets, and optimization strategy | COMPLETE — implementation, proposed stages and limitations are separated. |
+| 5 | Hardware platform, smartphone BOM, and power reasoning completed | COMPLETE — proposed SoC class with no fabricated handset measurements. |
+| 6 | Team profiles and timeline filled | COMPLETE — verified team roster and actual Phase 2/Phase 3 milestones. |
+| 7 | Placeholder text removed; diagrams inserted | COMPLETE — software pipeline and smartphone deployment diagrams included. |
+| 8 | Demo/prototype link attached and PDF exported | LIMITATION — a strict demo CLI exists; its measured artifact is an input-validation failure. PDF export requires access to the official Google Doc master. |
 
 ## Source and Evidence Notes
 

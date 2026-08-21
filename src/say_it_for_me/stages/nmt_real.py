@@ -22,6 +22,19 @@ _M2M100_LANG_CODES = {
 }
 
 
+def _validate_request(transcript: Transcript, target_language: Language) -> None:
+    if transcript.language is target_language:
+        raise ValueError("translation source and target languages must differ")
+    if not transcript.text.strip():
+        raise ValueError("translation input text must not be empty")
+
+
+def _require_translation_output(text: str, model_name: str) -> str:
+    if not text.strip():
+        raise ValueError(f"{model_name} returned an empty translation")
+    return text
+
+
 class NllbTranslator:
     """Real NMT adapter using facebook/nllb-200-distilled-600M."""
 
@@ -56,6 +69,7 @@ class NllbTranslator:
         transcript: Transcript,
         target_language: Language,
     ) -> Translation:
+        _validate_request(transcript, target_language)
         self.warmup()
         assert self._model is not None and self._tokenizer is not None
 
@@ -78,7 +92,9 @@ class NllbTranslator:
                 forced_bos_token_id=forced_bos,
                 max_new_tokens=self._max_length,
             )
-        translated_text = self._tokenizer.decode(generated[0], skip_special_tokens=True)
+        translated_text = _require_translation_output(
+            self._tokenizer.decode(generated[0], skip_special_tokens=True), "NLLB"
+        )
         elapsed_ms = (time.perf_counter_ns() - start) / 1_000_000
 
         logger.info(
@@ -130,6 +146,7 @@ class M2M100Translator:
         transcript: Transcript,
         target_language: Language,
     ) -> Translation:
+        _validate_request(transcript, target_language)
         self.warmup()
         assert self._model is not None and self._tokenizer is not None
 
@@ -152,7 +169,9 @@ class M2M100Translator:
                 forced_bos_token_id=forced_bos,
                 max_new_tokens=self._max_length,
             )
-        translated_text = self._tokenizer.decode(generated[0], skip_special_tokens=True)
+        translated_text = _require_translation_output(
+            self._tokenizer.decode(generated[0], skip_special_tokens=True), "M2M100"
+        )
         elapsed_ms = (time.perf_counter_ns() - start) / 1_000_000
 
         logger.info(

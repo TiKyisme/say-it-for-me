@@ -1,9 +1,7 @@
-"""Smoke tests for the real Whisper ASR adapter.
-
-Skipped automatically when faster-whisper is not installed.
-"""
+"""Adapter-boundary tests and opt-in smoke test for real Whisper ASR."""
 from __future__ import annotations
 
+import os
 import unittest
 
 from say_it_for_me.contracts import AudioBuffer, Language
@@ -23,31 +21,28 @@ def _make_silence(duration_s: float = 1.0) -> AudioBuffer:
 
 
 @unittest.skipUnless(_HAS_FASTER_WHISPER, "faster-whisper not installed")
-class WhisperRecognizerTests(unittest.TestCase):
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.recognizer = WhisperRecognizer(
-            model_size="tiny", device="cpu", compute_type="int8"
-        )
-        cls.recognizer.warmup()
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.recognizer.close()
-
+class WhisperRecognizerBoundaryTests(unittest.TestCase):
     def test_rejects_wrong_sample_rate(self) -> None:
+        recognizer = WhisperRecognizer(model_size="tiny", device="cpu", compute_type="int8")
         bad_audio = AudioBuffer(tuple(0.0 for _ in range(48_000)), 48_000)
         with self.assertRaisesRegex(ValueError, "16 kHz"):
-            self.recognizer.transcribe(bad_audio, Language.VIETNAMESE, "test-001")
+            recognizer.transcribe(bad_audio, Language.VIETNAMESE, "test-001")
 
+    @unittest.skipUnless(
+        os.getenv("RUN_REAL_INFERENCE_SMOKE") == "1",
+        "set RUN_REAL_INFERENCE_SMOKE=1 to permit a local Whisper model smoke test",
+    )
     def test_transcribe_returns_transcript(self) -> None:
+        recognizer = WhisperRecognizer(model_size="tiny", device="cpu", compute_type="int8")
         audio = _make_silence(2.0)
         try:
-            result = self.recognizer.transcribe(
+            result = recognizer.transcribe(
                 audio, Language.VIETNAMESE, "test-002"
             )
         except ValueError:
             self.skipTest("Whisper returned empty on silence input (expected edge case)")
+        finally:
+            recognizer.close()
 
         self.assertEqual(result.language, Language.VIETNAMESE)
         self.assertEqual(result.utterance_id, "test-002")
